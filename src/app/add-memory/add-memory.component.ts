@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-memory',
@@ -9,17 +8,17 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class AddMemoryComponent implements OnInit {
 
+  memory: any = {};
+
   constructor(private db: AngularFireDatabase) { }
+
+  ngOnInit() {
+
+  }
+
   onSubmit() {
-    this.memory.date = new Date(this.memory.date).valueOf();
+    this.memory.date = new Date(this.memory.date).valueOf();    
     this.db.list('memories').push(this.memory)
-      .then(_ => {
-        this.memory = {}
-        console.log('success')
-      })     
+      .then(_ => console.log('success'))      
   }
-
-  ngOnInit(): void {
-  }
-
 }
